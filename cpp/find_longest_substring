@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string>
+
+int substring_length(std::string &str)
+{
+	int tlen = str.length();
+	int i = 0;	// begin point of a substring
+	int j = 0;	// end point of a substring
+	int k = 0;	// between them
+	int res_len = 0;
+
+	for (i=0; i<tlen; ++i) {
+		for (j=i+1; j<tlen; ++j) {
+			for (k=i; k<j; ++k) {
+				if (str[k] == str[j]) {
+					break;
+				}
+			}
+
+			if (k < j) {
+				break;
+			}
+
+			if (res_len < j+1-i) {
+				res_len = j + 1 - i;
+			}
+		}
+	}
+
+	return res_len;
+}
+
+
+int main()
+{
+	std::string str1 = "abcabcabc";
+	std::string str2 = "bbbbbbbb";
+	std::string str3 = "pwwkew";
+	std::string str4 = "abcdeabcdefabcdefgabcdefgh";
+
+	printf("%s, %d\n", str1.c_str(), substring_length(str1));
+	printf("%s, %d\n", str2.c_str(), substring_length(str2));
+	printf("%s, %d\n", str3.c_str(), substring_length(str3));
+	printf("%s, %d\n", str4.c_str(), substring_length(str4));
+
+	getchar();
+	return 0;
+}
