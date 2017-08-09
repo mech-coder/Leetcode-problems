@@ -1,0 +1,51 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    string tree2str(TreeNode* t) {
+        
+        char buf[100];
+        std::string lstr;
+        std::string rstr;
+        
+        if( NULL == t ){
+            return std::string("");
+        }
+        
+        sprintf(buf, "%d", t->val);
+        std::string res(buf);
+        
+        if( NULL == t->left ){
+            
+            if( NULL == t->right ){
+                 //return res;
+            }
+            else{
+                rstr = tree2str(t->right);
+                res = res + "()" + "(" + rstr + ")";
+            }
+            
+        }else{
+            
+            lstr = tree2str(t->left);
+            res = res + "(" + lstr + ")";
+            
+            if( NULL == t->right ){
+                //
+            }
+            else{
+                rstr = tree2str(t->right);
+                res = res + "(" + rstr + ")";
+            }
+        }
+        
+        return res;
+    }
+};
